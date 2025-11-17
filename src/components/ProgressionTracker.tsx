@@ -121,10 +121,10 @@ export default function ProgressionTracker() {
 
         @keyframes pulse {
           0%, 100% {
-            box-shadow: 0 0 8px rgba(240, 184, 108, 0.3);
+            box-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
           }
           50% {
-            box-shadow: 0 0 12px rgba(240, 184, 108, 0.5);
+            box-shadow: 0 0 12px rgba(212, 165, 116, 0.5);
           }
         }
 
@@ -146,7 +146,7 @@ export default function ProgressionTracker() {
 
         .reward-item:hover {
           transform: translateX(4px);
-          background: rgba(59, 130, 246, 0.08) !important;
+          background: rgba(59, 130, 246, 0.05) !important;
         }
 
         .upcoming-item {
@@ -155,7 +155,7 @@ export default function ProgressionTracker() {
 
         .upcoming-item:hover {
           transform: translateX(4px);
-          background: rgba(255, 255, 255, 0.04) !important;
+          background: rgba(255, 255, 255, 0.03) !important;
         }
       `}</style>
 
@@ -176,9 +176,9 @@ export default function ProgressionTracker() {
           width: '100%',
           maxWidth: '520px',
           maxHeight: '90vh',
-          background: '#0a0e17',
+          background: '#060a14',
           borderRadius: '20px',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.05)',
           boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
           overflow: 'auto',
           fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
@@ -189,13 +189,13 @@ export default function ProgressionTracker() {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '16px 20px',
-            borderBottom: '1px solid rgba(59, 130, 246, 0.2)',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
           }}>
             <h1 style={{
               fontSize: '20px',
               fontWeight: '700',
               margin: 0,
-              color: '#f0b86c',
+              color: '#d4a574',
             }}>YOUR NEXT POWER UP IN:</h1>
             <button style={{
               backgroundColor: 'transparent',
@@ -212,8 +212,8 @@ export default function ProgressionTracker() {
           }}>
             {/* Timer Section */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(15, 19, 24, 0.8) 100%)',
-              border: '2px solid rgba(59, 130, 246, 0.4)',
+              background: 'linear-gradient(135deg, rgba(212, 165, 116, 0.08) 0%, #060a14 100%)',
+              border: '1px solid rgba(212, 165, 116, 0.2)',
               borderRadius: '16px',
               padding: '24px 20px',
               marginBottom: '24px',
@@ -226,7 +226,7 @@ export default function ProgressionTracker() {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 60%)',
+                background: 'radial-gradient(circle at top right, rgba(212, 165, 116, 0.03), transparent 60%)',
                 pointerEvents: 'none',
               }} />
 
@@ -242,8 +242,8 @@ export default function ProgressionTracker() {
                 }}>
                   <div className="timer-box" style={{
                     flex: 1,
-                    background: 'rgba(240, 184, 108, 0.05)',
-                    border: '1px solid rgba(240, 184, 108, 0.3)',
+                    background: '#060a14',
+                    border: '1px solid rgba(212, 165, 116, 0.2)',
                     borderRadius: '10px',
                     padding: '12px 8px',
                     textAlign: 'center',
@@ -251,7 +251,7 @@ export default function ProgressionTracker() {
                     <div style={{
                       fontSize: '36px',
                       fontWeight: '700',
-                      color: '#f0b86c',
+                      color: '#d4a574',
                       lineHeight: '1',
                       marginBottom: '4px',
                     }}>{timeLeft.days}</div>
@@ -264,8 +264,8 @@ export default function ProgressionTracker() {
 
                   <div className="timer-box" style={{
                     flex: 1,
-                    background: 'rgba(240, 184, 108, 0.05)',
-                    border: '1px solid rgba(240, 184, 108, 0.3)',
+                    background: '#060a14',
+                    border: '1px solid rgba(212, 165, 116, 0.2)',
                     borderRadius: '10px',
                     padding: '12px 8px',
                     textAlign: 'center',
@@ -273,7 +273,7 @@ export default function ProgressionTracker() {
                     <div style={{
                       fontSize: '36px',
                       fontWeight: '700',
-                      color: '#f0b86c',
+                      color: '#d4a574',
                       lineHeight: '1',
                       marginBottom: '4px',
                     }}>{timeLeft.hours}</div>
@@ -286,8 +286,8 @@ export default function ProgressionTracker() {
 
                   <div className="timer-box" style={{
                     flex: 1,
-                    background: 'rgba(240, 184, 108, 0.05)',
-                    border: '1px solid rgba(240, 184, 108, 0.3)',
+                    background: '#060a14',
+                    border: '1px solid rgba(212, 165, 116, 0.2)',
                     borderRadius: '10px',
                     padding: '12px 8px',
                     textAlign: 'center',
@@ -295,7 +295,7 @@ export default function ProgressionTracker() {
                     <div style={{
                       fontSize: '36px',
                       fontWeight: '700',
-                      color: '#f0b86c',
+                      color: '#d4a574',
                       lineHeight: '1',
                       marginBottom: '4px',
                     }}>{timeLeft.minutes}</div>
@@ -328,9 +328,9 @@ export default function ProgressionTracker() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
-                      background: 'radial-gradient(circle, rgba(240, 184, 108, 0.3) 0%, transparent 70%)',
-                      border: '2px solid #f0b86c',
-                      boxShadow: '0 0 20px rgba(240, 184, 108, 0.4)',
+                      background: 'radial-gradient(circle, rgba(212, 165, 116, 0.3) 0%, transparent 70%)',
+                      border: '2px solid #d4a574',
+                      boxShadow: '0 0 20px rgba(212, 165, 116, 0.4)',
                     }}>
                       {currentRank.icon}
                     </div>
@@ -348,7 +348,7 @@ export default function ProgressionTracker() {
                       <div style={{
                         fontSize: '18px',
                         fontWeight: '700',
-                        color: '#f0b86c'
+                        color: '#d4a574'
                       }}>{currentRank.name}</div>
                     </div>
                   </div>
@@ -396,7 +396,7 @@ export default function ProgressionTracker() {
 
                 {/* Progress Bar */}
                 <div style={{
-                  background: 'rgba(240, 184, 108, 0.1)',
+                  background: 'rgba(212, 165, 116, 0.05)',
                   borderRadius: '4px',
                   height: '8px',
                   overflow: 'hidden',
@@ -404,10 +404,10 @@ export default function ProgressionTracker() {
                 }}>
                   <div style={{
                     height: '100%',
-                    background: 'linear-gradient(90deg, #f0b86c 0%, #f4c57c 100%)',
+                    background: 'linear-gradient(90deg, #d4a574 0%, #e5c38c 100%)',
                     borderRadius: '4px',
                     transition: 'width 0.3s ease',
-                    boxShadow: '0 0 8px rgba(240, 184, 108, 0.4)',
+                    boxShadow: '0 0 8px rgba(212, 165, 116, 0.4)',
                     width: `${Math.min(progressPercentage, 100)}%`
                   }} />
                 </div>
@@ -448,7 +448,7 @@ export default function ProgressionTracker() {
                 {/* Power Level Progress Bar */}
                 <div
                   style={{
-                    background: 'rgba(255, 69, 0, 0.1)',
+                    background: 'rgba(255, 69, 0, 0.05)',
                     borderRadius: '4px',
                     height: '8px',
                     overflow: 'visible',
@@ -472,7 +472,7 @@ export default function ProgressionTracker() {
                       bottom: '120%',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      background: '#1a1f2e',
+                      background: '#060a14',
                       border: '1px solid rgba(255, 69, 0, 0.5)',
                       borderRadius: '8px',
                       padding: '8px 12px',
@@ -499,7 +499,7 @@ export default function ProgressionTracker() {
                         height: 0,
                         borderLeft: '6px solid transparent',
                         borderRight: '6px solid transparent',
-                        borderTop: '6px solid #1a1f2e',
+                        borderTop: '6px solid #070b15',
                       }} />
                     </div>
                   )}
@@ -543,8 +543,8 @@ export default function ProgressionTracker() {
                         flexDirection: 'column',
                         gap: '12px',
                         padding: '12px 14px',
-                        background: 'rgba(59, 130, 246, 0.05)',
-                        border: '1px solid rgba(59, 130, 246, 0.2)',
+                        background: '#0d1a25',
+                        border: '1px solid rgba(59, 130, 246, 0.15)',
                         borderRadius: '10px',
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
@@ -614,8 +614,8 @@ export default function ProgressionTracker() {
                         flexDirection: 'column',
                         gap: '12px',
                         padding: '12px 14px',
-                        background: 'rgba(255, 255, 255, 0.02)',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        background: '#0d1a25',
+                        border: '1px solid rgba(255, 255, 255, 0.05)',
                         borderRadius: '10px',
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
