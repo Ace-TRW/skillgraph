@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Star, BookOpen, Gift, Users, Zap, Trophy, Award, ChevronRight } from 'lucide-react';
 
 export default function ProgressionTracker() {
