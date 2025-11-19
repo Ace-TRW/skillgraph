@@ -371,7 +371,7 @@ export default function ProgressionTracker() {
                       background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
                       border: '2px solid #3b82f6',
                       boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
-                      color: '#94a3b8'
+                      color: '#cbd5e1'
                     }}>
                       {currentRank.icon}
                     </div>
@@ -412,7 +412,7 @@ export default function ProgressionTracker() {
                       flexShrink: 0,
                       border: '2px solid #d4a574',
                       backgroundColor: 'rgba(212, 165, 116, 0.1)',
-                      color: '#94a3b8'
+                      color: '#cbd5e1'
                     }}>
                       {nextRank.icon}
                     </div>
