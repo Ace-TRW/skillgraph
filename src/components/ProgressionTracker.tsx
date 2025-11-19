@@ -107,7 +107,6 @@ export default function ProgressionTracker() {
   const xpForNextLevel = calculateTotalXPForLevel(currentPowerLevel + 1);
   const xpNeededForNextLevel = xpForNextLevel - xpForCurrentLevel;
   const xpProgressInCurrentLevel = currentXP - xpForCurrentLevel;
-  const powerLevelProgress = (xpProgressInCurrentLevel / xpNeededForNextLevel) * 100;
   const xpGainAmount = 14;
   // When visible, base progress excludes the gain. When invisible (absorbed), base includes it.
   const currentDisplayedProgress = xpGainVisible 
@@ -372,7 +371,7 @@ export default function ProgressionTracker() {
                       background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
                       border: '2px solid #3b82f6',
                       boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
-                      color: '#e2e8f0'
+                      color: '#94a3b8'
                     }}>
                       {currentRank.icon}
                     </div>
@@ -413,7 +412,7 @@ export default function ProgressionTracker() {
                       flexShrink: 0,
                       border: '2px solid #d4a574',
                       backgroundColor: 'rgba(212, 165, 116, 0.1)',
-                      color: '#e2e8f0'
+                      color: '#94a3b8'
                     }}>
                       {nextRank.icon}
                     </div>
