@@ -2,10 +2,21 @@ import { useState, useEffect } from 'react';
 import { X, Star, BookOpen, Gift, Users, Zap, Trophy, Award, ChevronRight } from 'lucide-react';
 
 export default function ProgressionTracker() {
-  const initialTime = { days: 3, hours: 0, minutes: 0 };
+  const initialTime = { days: 30, hours: 0, minutes: 0 };
   const [timeLeft, setTimeLeft] = useState({ days: 2, hours: 14, minutes: 32 });
   const [expandedPerk, setExpandedPerk] = useState<string | null>(null);
   const [showPowerLevelTooltip, setShowPowerLevelTooltip] = useState(false);
+  const [showXpGainTooltip, setShowXpGainTooltip] = useState(false);
+
+  const [xpGainVisible, setXpGainVisible] = useState(true);
+
+  useEffect(() => {
+    // Hide XP gain bar after animation
+    const timer = setTimeout(() => {
+      setXpGainVisible(false);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -97,15 +108,27 @@ export default function ProgressionTracker() {
   const xpNeededForNextLevel = xpForNextLevel - xpForCurrentLevel;
   const xpProgressInCurrentLevel = currentXP - xpForCurrentLevel;
   const powerLevelProgress = (xpProgressInCurrentLevel / xpNeededForNextLevel) * 100;
+  const xpGainAmount = 14;
+  // When visible, base progress excludes the gain. When invisible (absorbed), base includes it.
+  const currentDisplayedProgress = xpGainVisible 
+    ? ((xpProgressInCurrentLevel - xpGainAmount) / xpNeededForNextLevel) * 100
+    : (xpProgressInCurrentLevel / xpNeededForNextLevel) * 100;
+    
+  const xpGainProgress = (xpGainAmount / xpNeededForNextLevel) * 100;
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+          from { opacity: 1; }
+          to { opacity: 0; }
         }
 
         @keyframes slideUp {
@@ -125,6 +148,15 @@ export default function ProgressionTracker() {
           }
           50% {
             box-shadow: 0 0 12px rgba(212, 165, 116, 0.5);
+          }
+        }
+
+        @keyframes shine {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
           }
         }
 
@@ -176,7 +208,7 @@ export default function ProgressionTracker() {
           width: '100%',
           maxWidth: '520px',
           maxHeight: '90vh',
-          background: '#060a14',
+          background: '#060b15',
           borderRadius: '20px',
           border: '1px solid rgba(255, 255, 255, 0.05)',
           boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
@@ -188,7 +220,7 @@ export default function ProgressionTracker() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '16px 20px',
+            padding: '12px 20px 4px',
             borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
           }}>
             <h1 style={{
@@ -212,7 +244,7 @@ export default function ProgressionTracker() {
           }}>
             {/* Timer Section */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(212, 165, 116, 0.08) 0%, #060a14 100%)',
+              background: 'linear-gradient(135deg, rgba(212, 165, 116, 0.08) 0%, #060b15 100%)',
               border: '1px solid rgba(212, 165, 116, 0.2)',
               borderRadius: '16px',
               padding: '24px 20px',
@@ -242,19 +274,22 @@ export default function ProgressionTracker() {
                 }}>
                   <div className="timer-box" style={{
                     flex: 1,
-                    background: '#060a14',
+                    background: '#060b15',
                     border: '1px solid rgba(212, 165, 116, 0.2)',
                     borderRadius: '10px',
                     padding: '12px 8px',
                     textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden'
                   }}>
                     <div style={{
                       fontSize: '36px',
                       fontWeight: '700',
-                      color: '#d4a574',
+                      fontFamily: '"Black Ops One", monospace',
+                      color: '#ffffff',
                       lineHeight: '1',
                       marginBottom: '4px',
-                    }}>{timeLeft.days}</div>
+                    }}>{String(timeLeft.days).padStart(2, '0')}</div>
                     <div style={{
                       fontSize: '10px',
                       color: '#a0aec0',
@@ -264,19 +299,22 @@ export default function ProgressionTracker() {
 
                   <div className="timer-box" style={{
                     flex: 1,
-                    background: '#060a14',
+                    background: '#060b15',
                     border: '1px solid rgba(212, 165, 116, 0.2)',
                     borderRadius: '10px',
                     padding: '12px 8px',
                     textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden'
                   }}>
                     <div style={{
                       fontSize: '36px',
                       fontWeight: '700',
-                      color: '#d4a574',
+                      fontFamily: '"Black Ops One", monospace',
+                      color: '#ffffff',
                       lineHeight: '1',
                       marginBottom: '4px',
-                    }}>{timeLeft.hours}</div>
+                    }}>{String(timeLeft.hours).padStart(2, '0')}</div>
                     <div style={{
                       fontSize: '10px',
                       color: '#a0aec0',
@@ -286,19 +324,22 @@ export default function ProgressionTracker() {
 
                   <div className="timer-box" style={{
                     flex: 1,
-                    background: '#060a14',
+                    background: '#060b15',
                     border: '1px solid rgba(212, 165, 116, 0.2)',
                     borderRadius: '10px',
                     padding: '12px 8px',
                     textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden'
                   }}>
                     <div style={{
                       fontSize: '36px',
                       fontWeight: '700',
-                      color: '#d4a574',
+                      fontFamily: '"Black Ops One", monospace',
+                      color: '#ffffff',
                       lineHeight: '1',
                       marginBottom: '4px',
-                    }}>{timeLeft.minutes}</div>
+                    }}>{String(timeLeft.minutes).padStart(2, '0')}</div>
                     <div style={{
                       fontSize: '10px',
                       color: '#a0aec0',
@@ -328,9 +369,10 @@ export default function ProgressionTracker() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
-                      background: 'radial-gradient(circle, rgba(212, 165, 116, 0.3) 0%, transparent 70%)',
-                      border: '2px solid #d4a574',
-                      boxShadow: '0 0 20px rgba(212, 165, 116, 0.4)',
+                      background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
+                      border: '2px solid #3b82f6',
+                      boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
+                      color: '#e2e8f0'
                     }}>
                       {currentRank.icon}
                     </div>
@@ -348,12 +390,12 @@ export default function ProgressionTracker() {
                       <div style={{
                         fontSize: '18px',
                         fontWeight: '700',
-                        color: '#d4a574'
+                        color: '#3b82f6'
                       }}>{currentRank.name}</div>
                     </div>
                   </div>
 
-                  <ChevronRight size={28} color="#3b82f6" />
+                  <ChevronRight size={28} color="#d4a574" />
 
                   <div style={{
                     display: 'flex',
@@ -369,8 +411,9 @@ export default function ProgressionTracker() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
-                      border: '2px solid #3b82f6',
-                      backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                      border: '2px solid #d4a574',
+                      backgroundColor: 'rgba(212, 165, 116, 0.1)',
+                      color: '#e2e8f0'
                     }}>
                       {nextRank.icon}
                     </div>
@@ -388,13 +431,35 @@ export default function ProgressionTracker() {
                       <div style={{
                         fontSize: '18px',
                         fontWeight: '700',
-                        color: '#3b82f6'
+                        color: '#d4a574'
                       }}>{nextRank.name}</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Progress Bar */}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '8px',
+                }}>
+                  <div style={{
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#a0aec0',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                  }}>
+                    YOUR CHESS RANK
+                  </div>
+                  <div style={{
+                    fontSize: '12px',
+                    color: '#a0aec0',
+                  }}>
+                    {Math.ceil(initialTime.days - timeLeft.days - (timeLeft.hours/24))} / {initialTime.days} Days
+                  </div>
+                </div>
                 <div style={{
                   background: 'rgba(212, 165, 116, 0.05)',
                   borderRadius: '4px',
@@ -404,10 +469,10 @@ export default function ProgressionTracker() {
                 }}>
                   <div style={{
                     height: '100%',
-                    background: 'linear-gradient(90deg, #d4a574 0%, #e5c38c 100%)',
+                    background: 'linear-gradient(90deg, #d4a574 0%, #e5c38c 50%, #fff 80%, #e5c38c 100%)',
                     borderRadius: '4px',
                     transition: 'width 0.3s ease',
-                    boxShadow: '0 0 8px rgba(212, 165, 116, 0.4)',
+                    boxShadow: '0 0 12px rgba(212, 165, 116, 0.5), inset 0 0 4px rgba(255, 255, 255, 0.2)',
                     width: `${Math.min(progressPercentage, 100)}%`
                   }} />
                 </div>
@@ -440,7 +505,61 @@ export default function ProgressionTracker() {
                   <div style={{
                     fontSize: '12px',
                     color: '#a0aec0',
+                    display: 'flex',
+                    alignItems: 'center'
                   }}>
+                    <span
+                      style={{
+                        color: '#4ade80',
+                        fontWeight: '700',
+                        marginRight: '8px',
+                        fontSize: '13px',
+                        cursor: 'help',
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                      onMouseEnter={() => setShowXpGainTooltip(true)}
+                      onMouseLeave={() => setShowXpGainTooltip(false)}
+                    >
+                      +14 XP
+                      {showXpGainTooltip && (
+                        <div style={{
+                          position: 'absolute',
+                          bottom: '150%',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          background: '#060b15',
+                          border: '1px solid rgba(74, 222, 128, 0.5)',
+                          borderRadius: '8px',
+                          padding: '8px 12px',
+                          whiteSpace: 'nowrap',
+                          fontSize: '12px',
+                          color: '#ffffff',
+                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                          zIndex: 1000,
+                          pointerEvents: 'none',
+                        }}>
+                          <div style={{ fontWeight: '600', color: '#4ade80', marginBottom: '2px' }}>
+                            XP Gained
+                          </div>
+                          <div style={{ fontSize: '11px', color: '#a0aec0' }}>
+                            Since last check
+                          </div>
+                          <div style={{
+                            position: 'absolute',
+                            bottom: '-6px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: 0,
+                            height: 0,
+                            borderLeft: '6px solid transparent',
+                            borderRight: '6px solid transparent',
+                            borderTop: '6px solid #060b15',
+                          }} />
+                        </div>
+                      )}
+                    </span>
                     {xpProgressInCurrentLevel.toLocaleString()} / {xpNeededForNextLevel.toLocaleString()} XP
                   </div>
                 </div>
@@ -461,18 +580,39 @@ export default function ProgressionTracker() {
                   <div style={{
                     height: '100%',
                     background: 'linear-gradient(90deg, #ff0000 0%, #ff4500 25%, #ff8c00 50%, #ffa500 75%, #ffd700 100%)',
-                    borderRadius: '4px',
+                    borderRadius: xpGainVisible ? '4px 0 0 4px' : '4px',
                     transition: 'width 0.3s ease',
                     boxShadow: '0 0 8px rgba(255, 69, 0, 0.5)',
-                    width: `${Math.min(powerLevelProgress, 100)}%`
+                    width: `${Math.min(currentDisplayedProgress, 100)}%`,
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    zIndex: 1
                   }} />
+                  
+                  {/* XP Gain Animated Section */}
+                  {xpGainVisible && (
+                    <div style={{
+                      height: '100%',
+                      background: '#4ade80',
+                      borderRadius: '0 4px 4px 0',
+                      position: 'absolute',
+                      left: `${Math.min(currentDisplayedProgress, 100)}%`,
+                      top: 0,
+                      width: `${Math.min(xpGainProgress, 100 - currentDisplayedProgress)}%`,
+                      zIndex: 2,
+                      boxShadow: '0 0 10px rgba(74, 222, 128, 0.6)',
+                      animation: 'fadeOut 0.5s ease-out 3.5s forwards',
+                      borderLeft: '1px solid rgba(255, 255, 255, 0.2)'
+                    }} />
+                  )}
                   {showPowerLevelTooltip && (
                     <div style={{
                       position: 'absolute',
                       bottom: '120%',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      background: '#060a14',
+                      background: '#060b15',
                       border: '1px solid rgba(255, 69, 0, 0.5)',
                       borderRadius: '8px',
                       padding: '8px 12px',
@@ -499,7 +639,7 @@ export default function ProgressionTracker() {
                         height: 0,
                         borderLeft: '6px solid transparent',
                         borderRight: '6px solid transparent',
-                        borderTop: '6px solid #070b15',
+                        borderTop: '6px solid #060b15',
                       }} />
                     </div>
                   )}
@@ -551,19 +691,19 @@ export default function ProgressionTracker() {
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div style={{ color: '#3b82f6', display: 'flex', alignItems: 'center' }}>
+                        <div style={{ color: '#d4a574', display: 'flex', alignItems: 'center' }}>
                           {reward.icon}
                         </div>
                         <div style={{
                           fontFamily: '"Plus Jakarta Sans", sans-serif',
                           fontSize: '14px',
                           fontWeight: '500',
-                          color: '#3b82f6',
+                          color: '#d4a574',
                           flex: 1,
                         }}>{reward.text}</div>
                         <ChevronRight
                           size={16}
-                          color="#3b82f6"
+                          color="#d4a574"
                           style={{
                             transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
                             transition: 'transform 0.2s ease',
